@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 :root {
     --background-color: #f2f2f2;
     --text-color: #333;
@@ -411,3 +412,56 @@ body.dark-mode button.number:hover {
 #dark-mode-switch + label {
     transition: all 0.6s;
 } 
+=======
+html, body {
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+#horloge{
+    font-size: 40px;
+    color: #000;
+}
+
+#time {
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    border: 1px dotted #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+#presenter {
+    font-size: 17px;
+    visibility: hidden;
+}
+
+input[type="button"] {
+    border: none;
+    padding: 10px;
+    background-color: rgba(50, 205, 50, 0.25);
+    cursor: pointer;
+}
+
+html {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#timer {
+    font-weight: bold;
+    font-size: 4em;
+}
+
+nav {
+    display: block;
+}
+
+>>>>>>> aefe73d (ajout de l'Horlorgerie)
