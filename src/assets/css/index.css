@@ -1,0 +1,393 @@
+:root {
+    --background-color: #f2f2f2;
+    --text-color: #333;
+    --blue-color: #4885ed;
+    --grey-color: #444343;
+    --dark-background-color: #333;
+    --dark-text-color: #f2f2f2;
+    --dark-blue-color: #295db6;
+    --drak-grey-color: #2c2b2b;
+}
+
+body {
+    background: rgb(63,94,251);
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    height: 100vh;
+    width: 100vw;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    height: 100%;
+    width: 100%;
+}
+
+/** Navbar **/
+nav {
+    background-color: #333;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    height: 60px;
+    line-height: 50px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    opacity: 0.85;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+  
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding-top: 5px;
+    width: 100%;
+}
+  
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    opacity: 1;
+}
+
+.nav-left span, .nav-right span {
+    margin-right: 10px;
+}
+  
+#hour:before, #date:before, #vibration:before, #battery:before, #latency:before {
+    content: "\2022";
+    margin-right: 5px;
+}
+
+#hour:before, #date:before {
+    color: #ddd;
+}
+
+#vibration:before, #battery:before, #latency:before {
+    color: #f9a825;
+}
+
+#lock {
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+/** App **/
+#app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/** Settings **/
+#open-settings-btn {
+    background: url('../img/settings.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    margin-top: 100px; 
+    margin-left: 20px;
+    height: 80px;
+    width: 80px;
+    padding: 10px 20px; 
+    cursor: pointer;
+}
+  
+#settings-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Style pour le contenu de la fenêtre de paramètres */
+.modal-content {
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 5% auto;
+    padding: 20px;
+    max-width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+/* Style pour l'en-tête de la fenêtre de paramètres */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h1 {
+    font-size: 30px;
+    color: #000;
+}
+
+.close {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #aaa;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+label input[type="checkbox"],
+label input[type="radio"] {
+    margin-right: 10px;
+}
+
+#save-settings-button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#save-settings-button:hover {
+    background-color: #666;
+}
+
+input[type="text"],
+input[type="number"] {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.separator {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    width: 60px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #ee2a2a;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.6s;
+}
+  
+input[type="checkbox"]::before {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #e7e5e5;
+    position: relative;
+    top: 0;
+    left: 0;
+    transition: all 0.6s;
+}
+  
+input[type="checkbox"]:checked::before {
+    transform: translateX(30px);
+}
+
+input[type="checkbox"]:checked {
+    background-color: rgb(68, 224, 68);
+}
+
+/** Calculator **/
+#open-calculator-btn {
+    background: url('../img/calculator.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    margin-top: 30px; 
+    margin-left: 20px;
+    height: 80px;
+    width: 80px;
+    padding: 10px 20px; 
+    cursor: pointer;
+}
+
+#calculator-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#calculator {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding: 20px;
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 10px;
+}
+
+input[type="text"]#display {
+    background-color: #fff;
+    color: #333;
+    width: 90%;
+    height: 80px;
+    font-size: 36px;
+    text-align: right;
+    border: none;
+    margin-bottom: 20px;
+    padding-right: 20px;
+    border-radius: 10px;
+}
+  
+#calculator button {
+    background-color: var(--blue-color);
+    color: #fff;
+    border: none;
+    width: 70px;
+    height: 70px;
+    font-size: 24px;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border-radius: 5px;
+}
+  
+#calculator button:hover {
+    background-color: #fff;
+    color: var(--blue-color);
+}
+  
+#calculator button.number {
+    background-color: #fff;
+    color: var(--blue-color);
+}
+  
+#calculator button.number:hover {
+    background-color: var(--blue-color);
+    color: #fff;
+}
+
+#calculator button#btn-backspace {
+    width: 10.4rem;
+}  
+
+/** Dark Mode **/ 
+#dark {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 3rem 0;
+    padding-right: 18rem;
+}
+
+#dark-mode-switch {
+    appearance: none;
+    width: 60px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #ee2a2a;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.6s;
+}
+  
+#dark-mode-switch::before {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: relative;
+    top: 0;
+    left: 0;
+    transition: all 0.6s;
+}
+  
+#dark-mode-switch:checked::before {
+    transform: translateX(30px);
+}
+
+label[for="dark-mode-switch"] {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #000;
+}
+
+#dark-mode-switch:checked {
+    background-color: rgb(68, 224, 68);
+}
+  
+#dark-mode-switch:checked + label {
+    color: var(--dark-text-color);
+}   
+  
+#dark-mode-switch:checked + label:before {
+    content: "Light";
+}
+
+#dark-mode-switch + label:before {
+    content: "Dark";
+}
+
+body.dark-mode {
+    background-color: var(--dark-background-color);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode button.other {
+    background-color: var(--dark-blue-color);
+    color: #fff;
+}
+
+body.dark-mode button.other:hover {
+    background-color: var(--blue-color);
+    color: #fff;
+}
+
+body.dark-mode button.number {
+    background-color: var(--drak-grey-color);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode button.number:hover {
+    background-color: var(--grey-color);
+    color: var(--dark-text-color);
+}
+  
+#calculator,
+#dark-mode-switch + label {
+    transition: all 0.6s;
+} 

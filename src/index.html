@@ -1,15 +1,235 @@
 <!DOCTYPE html>
-<html lang="en-US">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="JavaScript">
-        <meta name="theme-color" content="#ffffff">
-        <title>JavaScript</title>
-        <link rel="stylesheet" href="./assets/index.css">
-    </head>
-    <body>
-        <h1>Web os js live</h1>
-        <script src="./index.js"></script>
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JavaScript">
+    <meta name="theme-color" content="#ffffff">
+    <title>Web os</title>
+
+    <link rel="stylesheet" href="./assets/css/index.css">
+
+    <link rel="icon" href="./assets/img/os.png" sizes="32x32">
+    <link rel="icon" href="./assets/img/os.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="./assets/img/os.png">
+
+    <script src="https://kit.fontawesome.com/fb0e5ed6b3.js" crossorigin="anonymous"></script>    
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-container">
+          <div class="nav-left">
+            <span id="hour"></span>
+            <span id="date"></span>
+          </div>
+          <div class="nav-right">
+            <span id="vibration"></span>
+            <span id="battery"></span>
+            <span id="latency"></span>
+            <span id="lock"><i class="fa-solid fa-power-off"></i></span>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div id="app-container">
+        <!-- Bouton pour ouvrir la fenêtre de paramètres -->
+        <button id="open-settings-btn"></button>
+
+        <!-- Bouton pour ouvrir la fenêtre calculatrice -->
+        <button id="open-calculator-btn"></button>
+      </div>
+
+      <!-- Fenêtre de paramètres -->
+      <div id="settings-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1>Paramètres</h1>
+            <span class="close">&times;</span>
+          </div>
+          <div class="modal-body">
+            <!-- Configurer l'affichage de l'heure -->
+            <section class="separator">
+              <h3>Affichage de l'heure</h3>
+              <label>
+                <input type="checkbox" id="show-hour" checked>
+                Afficher l'heure
+              </label>
+              <br>
+              <label>
+                <input type="checkbox" id="show-minute" checked>
+                Afficher les minutes
+              </label>
+              <br>
+              <label>
+                <input type="checkbox" id="show-second" checked>
+                Afficher les secondes
+              </label>
+            </section>
+
+            <!-- Configurer la date -->
+            <section class="separator">
+              <h3>Affichage de la date</h3>
+              <label>
+                <input type="checkbox" id="show-date" checked>
+                Afficher la date
+              </label>
+              <br>
+              <label>
+                <input type="checkbox" id="show-year" checked>
+                Afficher l'année
+              </label>
+              <br>
+              <label>
+                <input type="checkbox" id="show-month" checked>
+                Afficher le mois
+              </label>
+              <br>
+              <label>
+                <input type="checkbox" id="show-day" checked>
+                Afficher le jour
+              </label>
+            </section>
+
+            <!-- Configurer la vibration -->
+            <section class="separator">
+              <h3>Vibration</h3>
+              <label>
+                <input type="checkbox" id="show-vibration" checked>
+                Afficher l'état de la vibration
+              </label>
+              <br>
+              <label>
+                <input type="checkbox" id="enable-vibration" checked>
+                Activer les retours haptiques de vibration
+              </label>
+            </section>
+
+            <!-- Configurer la batterie -->
+            <section class="separator">
+              <h3>Batterie</h3>
+              <label>
+                <input type="checkbox" id="show-battery" checked>
+                Afficher l'état de la batterie
+              </label>
+            </section>
+
+            <!-- Configurer la latence réseau -->
+            <section class="separator">
+              <h3>Latence réseau</h3>
+              <label>
+                <input type="checkbox" id="show-latency" checked>
+                Afficher la latence réseau
+              </label>
+              <br>
+              <label>
+                Nom de domaine du serveur de ping :
+                <input type="text" id="ping-server" value="google.com">
+              </label>
+              <br>
+              <label>
+                Délai de rafraîchissement en secondes :
+                <input type="number" id="latency-refresh-rate" min="1" max="60" step="1" value="5">
+              </label>
+            </section>
+
+            <!-- Configurer la méthode de verrouillage de l'appareil -->
+            <section class="separator">  
+              <h3>Méthode de verrouillage de l'appareil</h3>
+              <label>
+                <input type="radio" id="lock-method-pin" name="lock-method-pin" value="pin" checked> 
+                Code PIN
+              </label>
+              <br>
+              <label>
+                <input type="radio" id="lock-method-pattern" name="lock-method-pin" value="pattern"> 
+                Motif
+              </label>
+            </section>
+
+            <!-- Configurer le thème -->
+            <h3>Thème</h3>
+            <label>
+              <input type="radio" id="theme-light" name="theme" value="light" checked>
+              Light
+            </label>
+            <br>
+            <label>
+              <input type="radio" id="theme-dark" name="theme" value="dark">
+              Dark
+            </label>
+
+            <!-- Bouton pour enregistrer les paramètres -->
+            <form>
+              <button id="save-settings-button">Enregistrer les paramètres</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fenêtre calculatrice -->
+      <div id="calculator-modal">
+        <div class="modal-content">
+          <div id="dark">
+            <input type="checkbox" id="dark-mode-switch">
+            <label for="dark-mode-switch"></label>
+          </div>
+          <div id="calculator">
+              <input type="text" id="display">
+              <br>
+              <button id="btn-clear" class="other">C</button>
+              <button id="btn-pos-neg" class="other">+/-</button>
+              <button id="btn-divide" class="other">/</button>
+              <button id="btn-multiply" class="other">*</button>
+              <br>
+              <button id="btn-7" class="number">7</button>
+              <button id="btn-8" class="number">8</button>
+              <button id="btn-9" class="number">9</button>
+              <button id="btn-minus" class="other">-</button>
+              <br>
+              <button id="btn-4" class="number">4</button>
+              <button id="btn-5" class="number">5</button>
+              <button id="btn-6" class="number">6</button>
+              <button id="btn-plus" class="other">+</button>
+              <br>
+              <button id="btn-1" class="number">1</button>
+              <button id="btn-2" class="number">2</button>
+              <button id="btn-3" class="number">3</button>
+              <button id="btn-equals" class="other">=</button>
+              <br>
+              <button id="btn-0" class="number">0</button>
+              <button id="btn-dot" class="other">.</button>
+              <button id="btn-backspace" class="other"><i class="fa-solid fa-delete-left"></i></button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const openSettingsBtn = document.getElementById("open-settings-btn");
+      const settingsModal = document.getElementById("settings-modal");
+      const closeBtn = document.querySelector(".close");
+
+      openSettingsBtn.addEventListener("click", function() {
+        settingsModal.style.display = "block";
+      });
+
+      closeBtn.addEventListener("click", function() {
+        settingsModal.style.display = "none";
+      });
+
+      const openCalculatorBtn = document.getElementById("open-calculator-btn");
+      const calculatorModal = document.getElementById("calculator-modal");
+
+      openCalculatorBtn.addEventListener("click", function() {
+        calculatorModal.style.display = "block";
+      });
+
+    </script>
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/calculator.js"></script>
+  </body>
 </html>
