@@ -1,172 +1,160 @@
-class Calculator {  
+class Calculator {
   constructor() {
-    const DISPLAY_SELECTOR = "#display";
-    const BTN_CLEAR_SELECTOR = "#btn-clear";
-    const BTN_POS_NEG_SELECTOR = "#btn-pos-neg";
-    const BTN_DIVIDE_SELECTOR = "#btn-divide";
-    const BTN_MULTIPLY_SELECTOR = "#btn-multiply";
-    const BTN_MINUS_SELECTOR = "#btn-minus";
-    const BTN_PLUS_SELECTOR = "#btn-plus";
-    const BTN_EQUALS_SELECTOR = "#btn-equals";
-    const BTN_BACKSPACE_SELECTOR = "#btn-backspace";
-    const DARK_MODE_SWITCH_SELECTOR = "#dark-mode-switch";
-
-    this.display = document.querySelector(DISPLAY_SELECTOR);
-    this.btnClear = document.querySelector(BTN_CLEAR_SELECTOR);
-    this.btnPosNeg = document.querySelector(BTN_POS_NEG_SELECTOR);
-    this.btnDivide = document.querySelector(BTN_DIVIDE_SELECTOR);
-    this.btnMultiply = document.querySelector(BTN_MULTIPLY_SELECTOR);
-    this.btnMinus = document.querySelector(BTN_MINUS_SELECTOR);
-    this.btnPlus = document.querySelector(BTN_PLUS_SELECTOR);
-    this.btnEquals = document.querySelector(BTN_EQUALS_SELECTOR);
-    this.btnBackspace = document.querySelector(BTN_BACKSPACE_SELECTOR);
-    this.darkModeSwitch = document.querySelector(DARK_MODE_SWITCH_SELECTOR);
-    this.result = 0;
-    this.currentNumber = "";
-    this.currentOperator = "";
-    this.hapticFeedback = false;
-
+    this.currentValue = 0;
+    this.operation = null;
+    this.pendingValue = null;
+    this.displayElem = document.getElementById('display');
+    this.db = null;
+    this.openDatabase();
     this.initEventListeners();
-    this.checkDarkMode();
+  }
 
-    console.log("Calculator initialized");
+  // function to open the database and create the object store if it doesn't exist
+  openDatabase() {
+    const request = window.indexedDB.open('CalculatorDB', 1); 
+    request.onerror = () => console.error('Failed to open database'); 
+    request.onsuccess = () => {
+      console.log('Database opened successfully');
+      this.db = request.result;
+    };
+    request.onupgradeneeded = (event) => {
+      console.log('Upgrading database');
+      const db = event.target.result;
+      db.createObjectStore('calculations', { keyPath: 'id', autoIncrement: true }); 
+    };
   }
 
   initEventListeners() {
-    const NUMBER_BTN_SELECTOR = ".number";
-
-    this.btnClear.addEventListener("click", () => {
-      this.reset();
-    });
-
-    this.btnPosNeg.addEventListener("click", () => {
-      this.currentNumber = -1 * parseFloat(this.currentNumber);
-      this.updateDisplay();
-      this.triggerHapticFeedback();
-    });
-
-    this.btnDivide.addEventListener("click", () => {
-      this.performOperation("/");
-      this.triggerHapticFeedback();
-    });
-
-    this.btnMultiply.addEventListener("click", () => {
-      this.performOperation("x");
-      this.triggerHapticFeedback();
-    });
-
-    this.btnMinus.addEventListener("click", () => {
-      this.performOperation("-");
-      this.triggerHapticFeedback();
-    });
-
-    this.btnPlus.addEventListener("click", () => {
-      this.performOperation("+");
-      this.triggerHapticFeedback();
-    });
-
-    this.btnEquals.addEventListener("click", () => {
-      this.calculate();
-      this.triggerHapticFeedback();
-    });
-
-    this.btnBackspace.addEventListener("click", () => {
-      this.backspace();
-    });
-
-    this.darkModeSwitch.addEventListener("change", () => {
-      this.toggleDarkMode();
-      this.triggerHapticFeedback();
-    });
-
-    document.querySelectorAll(NUMBER_BTN_SELECTOR).forEach(numberBtn => {
-      numberBtn.addEventListener("click", event => {
-        this.addDigit(event.target.innerText);
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const value = button.textContent;
+        switch (value) {
+          case '+':
+          case '-':
+          case '*':
+          case '/':
+            this.handleOperation(value);
+            break;
+          case '=':
+            this.handleEquals();
+            break;
+          case 'C':
+            this.handleClear();
+            break;
+          case '+/-':
+            this.handleNegate();
+            break;
+          case '.':
+            this.handleDecimal();
+            break;
+          case '':
+            this.handleBackspace();
+            break;
+          default:
+            this.handleNumber(value);
+        }
+        this.updateVibration();
       });
     });
   }
 
-  checkDarkMode() {
-    if (localStorage.getItem("darkMode") === "enabled") {
-      this.darkModeSwitch.checked = true;
-      this.toggleDarkMode();
-    }
-  }
-
-  toggleDarkMode() {
-    if (this.darkModeSwitch.checked) {
-      document.body.classList.add("dark-mode");
-      localStorage.setItem("darkMode", "enabled");
+  handleNumber(value) {
+    if (this.currentValue === 0) {
+      this.currentValue = value;
     } else {
-      document.body.classList.remove("dark-mode");
-      localStorage.setItem("darkMode", "disabled");
+      this.currentValue += value;
     }
-  }
-
-  addDigit(digit) {
-    this.currentNumber += digit;
     this.updateDisplay();
   }
 
-  performOperation(operator) { 
-    if (this.currentOperator === "") {
-      this.result = parseFloat(this.currentNumber);
-      this.currentNumber = "";
-      this.currentOperator = operator;
-    } else {
-      this.calculate();
-      this.currentOperator = operator;
+  handleOperation(op) {
+    if (this.pendingValue !== null) {
+      this.handleEquals();
     }
+    this.pendingValue = this.currentValue;
+    this.currentValue = 0;
+    this.operation = op;
   }
 
-  calculate() {
-    switch (this.currentOperator) {
-      case "+":
-        this.result += parseFloat(this.currentNumber);
+  handleEquals() {
+    if (this.operation === null) {
+      return;
+    }
+    const val1 = parseFloat(this.pendingValue);
+    const val2 = parseFloat(this.currentValue);
+    let result;
+    switch (this.operation) {
+      case '+':
+        result = val1 + val2;
         break;
-      case "-":
-        this.result -= parseFloat(this.currentNumber);
+      case '-':
+        result = val1 - val2;
         break;
-      case "*":
-        this.result *= parseFloat(this.currentNumber);
+      case '*':
+        result = val1 * val2;
         break;
-      case "/":
-        this.result /= parseFloat(this.currentNumber);
+      case '/':
+        result = val1 / val2;
         break;
       default:
-        this.result = parseFloat(this.currentNumber);
+        return;
     }
+    this.saveCalculation(val1, this.operation, val2, result);
+    this.pendingValue = null;
+    this.currentValue = result;
+    this.operation = null;
+    this.updateDisplay();
+  }
 
-    this.currentNumber = "";
-    this.currentOperator = "";
+  handleClear() {
+    this.currentValue = 0;
+    this.pendingValue = null;
+    this.operation = null;
+    this.updateDisplay();
+  }
+
+  handleNegate() {
+    this.currentValue = -parseFloat(this.currentValue);
+    this.updateDisplay();
+  }
+
+  handleDecimal() {
+    if (this.currentValue.indexOf('.') === -1) {
+      this.currentValue += '.';
+    }
+    this.updateDisplay();
+  }
+
+  handleBackspace() {
+    if (this.currentValue === 0) {
+      return;
+    }
+    this.currentValue = this.currentValue.toString().slice(0, -1);
+    if (this.currentValue === '') {
+      this.currentValue = 0;
+    }
     this.updateDisplay();
   }
 
   updateDisplay() {
-    this.display.value = this.currentNumber || this.result || 0;
+    this.displayElem.value = this.currentValue;
   }
 
-  reset() {
-    this.result = 0;
-    this.currentNumber = "";
-    this.currentOperator = "";
-    this.updateDisplay();
-  }
-
-  backspace() {
-    if(this.currentNumber) {
-      this.currentNumber = this.currentNumber.toString().slice(0, -1);
-      this.updateDisplay();
-    }
-  }
-
-  triggerHapticFeedback() {
-    if (window.navigator.vibrate) {
-      console.log("Haptic feedback triggered");
-      window.navigator.vibrate(50);
-    }
+  saveCalculation(val1, op, val2, result) {
+    const calculation = {
+      value1: val1,
+      operator: op,
+      value2: val2,
+      result: result,
+      timestamp: new Date()
+    };
+    const transaction = this.db.transaction(['calculations'], 'readwrite');
+    const store = transaction.objectStore('calculations');
+    const request = store.add(calculation);
+    request.onerror = () => console.error('Failed to save calculation');
+    request.onsuccess = () => console.log('Calculation saved successfully');
   }
 }
-  
-  const calculator = new Calculator();
-  
+
+const calculator = new Calculator();

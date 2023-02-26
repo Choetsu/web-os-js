@@ -80,6 +80,7 @@ nav {
 
 /** App **/
 #app-container {
+    padding-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -90,12 +91,14 @@ nav {
     background: url('../img/settings.png') no-repeat center center;
     background-size: contain;
     border: none;
-    margin-top: 100px; 
     margin-left: 20px;
     height: 80px;
     width: 80px;
     padding: 10px 20px; 
     cursor: pointer;
+    position: relative;
+    top: 0;
+    left: 0;
 }
   
 #settings-modal {
@@ -141,6 +144,20 @@ nav {
 
 .close:hover,
 .close:focus {
+    color: #aaa;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.close-calc {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+}
+
+.close-calc:hover,
+.close-calc:focus {
     color: #aaa;
     text-decoration: none;
     cursor: pointer;
@@ -236,6 +253,9 @@ input[type="checkbox"]:checked {
     width: 80px;
     padding: 10px 20px; 
     cursor: pointer;
+    position: relative;
+    top: 0;
+    left: 0;    
 }
 
 #calculator-modal {
