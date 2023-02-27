@@ -81,7 +81,7 @@ export default class SettingsManager {
     const enableBattery = localStorage.getItem('enableBattery') === 'true';
     const showLatency = localStorage.getItem('showLatency') === 'true';
     const pingServer = localStorage.getItem('pingServer') || 'google.com';
-    const refreshRate = localStorage.getItem('refreshRate') || 1000;
+    const refreshRate = localStorage.getItem('refreshRate') || 1;
     const enablePinLock = localStorage.getItem('enablePinLock') === 'true';
     const enablePatternLock = localStorage.getItem('enablePatternLock') === 'true';
 
