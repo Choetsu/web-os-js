@@ -1,5 +1,5 @@
-import * as Sentry from "@sentry/browser";
-import { BrowserTracing } from "@sentry/tracing";
+// import * as Sentry from "@sentry/browser";
+// import { BrowserTracing } from "@sentry/tracing";
 
 export default class SettingsManager {
   constructor() {
@@ -56,17 +56,17 @@ export default class SettingsManager {
     
   }
 
-  initSentry() {
-    Sentry.init({
-      dsn: "https://afdf00511842421a9d7497493afda5c2@o4504753336680448.ingest.sentry.io/4504753343627264",
-      integrations: [new BrowserTracing()],
+  // initSentry() {
+  //   Sentry.init({
+  //     dsn: "https://afdf00511842421a9d7497493afda5c2@o4504753336680448.ingest.sentry.io/4504753343627264",
+  //     integrations: [new BrowserTracing()],
     
-      // Set tracesSampleRate to 1.0 to capture 100%
-      // of transactions for performance monitoring.
-      // We recommend adjusting this value in production
-      tracesSampleRate: 1.0,
-    });
-  }
+  //     // Set tracesSampleRate to 1.0 to capture 100%
+  //     // of transactions for performance monitoring.
+  //     // We recommend adjusting this value in production
+  //     tracesSampleRate: 1.0,
+  //   });
+  // }
 
   updateCheckboxes() {
     const showHour = localStorage.getItem('showHour') === 'true';
@@ -222,7 +222,7 @@ export default class SettingsManager {
 
 // Create an instance of the Settings class
 const settings = new SettingsManager();
-settings.initSentry();
+// settings.initSentry();
 settings.updateCheckboxes();
 settings.updateHour();
 setInterval(settings.updateHour.bind(settings), 1000);
