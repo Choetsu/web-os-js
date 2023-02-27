@@ -1,1 +1,1 @@
-console.log('app is running');
+console.log("Hello, web-os-js !!!")
