@@ -16,7 +16,7 @@
 
     <script src="https://kit.fontawesome.com/fb0e5ed6b3.js" crossorigin="anonymous"></script>    
   </head>
-  <body>
+  <body onload="Horloge()">
     <header>
       <nav>
         <div class="nav-container">
@@ -41,6 +41,9 @@
 
         <!-- Bouton pour ouvrir la fenêtre calculatrice -->
         <button id="open-calculator-btn" class="draggable" draggable="true"></button>
+
+        <!-- Bouton pour ouvrir la fenêtre de l'horlogerie -->
+        <button id="open-horlogerie-btn" class="draggable" draggable="true"></button>
       </div>
 
       <!-- Fenêtre de paramètres -->
@@ -212,6 +215,55 @@
           </div>
         </div>
       </div>
+
+      <!-- Fenêtre horlogerie -->
+      <div id="horlogerie-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1>Horlogerie</h1>
+            <span class="close-horlogerie">&times;</span>
+          </div>
+          <div class="modal-body">
+
+              <ul>
+                  <li><a id="minuteur-btn">Minuteur</a></li>
+                  <li><a id="chrono-btn">Chronomètre</a></li>
+                  <li><a id="horloge-btn">Horloge</a></li>
+              </ul>
+            <div id="horlogerie">
+              <div id="horloge">
+                
+                <span id="horloge"></span>
+              </div>
+              <div id="chrono">
+                <h1>Chronomètre</h1>
+                  <div id="time"></div>
+
+                  <form name="parametre" action="" method="">
+                      <input type="button" name="lance" value="Démarrer" onclick="chrono();debut();" />
+                      <input type="button" name="pause" value="Stop" onclick="arret();" disabled="disabled" />
+                      <input type="button" name="zero" value="Effacer" onclick="arret();raz();" disabled="disabled" />
+                      <input type="button" name="intermediaire" value="Intermediaire" onclick="inter();" disabled="disabled" />
+                      <input type="button" name="rappel" value="Rappel" onclick="rappeler();" disabled="disabled" />
+                  </form>
+
+                  <div id="presenter">
+                      <p>Temps intermediaire :</p>
+                      <span id="interm"></span>
+                  </div>
+              </div>
+              <div id="minuteur">
+                <h1>Minuteur</h1>
+                <input type="number" id="input">
+                <input type="button" value="Démarrer" onclick="minuteur()">
+                <input type="button" value="Stop" onclick="stop()">
+                <div id="timer">00:00</div>
+                <audio id="xyz" src="./assets/audio/soundeffect2.mp3"></audio>
+              </div>
+            </div>
+          </div>
+
+      </div>
     </main>
 
     <script>
@@ -237,6 +289,18 @@
 
       closeBtnCalc.addEventListener("click", function() {
         calculatorModal.style.display = "none";
+      });
+
+      const openHorlogerieBtn = document.getElementById("open-horlogerie-btn");
+      const horlogerieModal = document.getElementById("horlogerie-modal");
+      const closeBtnHorlogerie = document.querySelector(".close-horlogerie");
+
+      openHorlogerieBtn.addEventListener("click", function() {
+        horlogerieModal.style.display = "block";
+      });
+
+      closeBtnHorlogerie.addEventListener("click", function() {
+        horlogerieModal.style.display = "none";
       });
     </script>
 
