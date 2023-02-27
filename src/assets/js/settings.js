@@ -42,7 +42,7 @@ export default class SettingsManager {
     this.refreshRateElem = document.getElementById('latency-refresh-rate');
     this.showLatency = localStorage.getItem('showLatency') === 'true';
     this.pingServer = localStorage.getItem('pingServer') || 'google.com';
-    this.refreshRate = localStorage.getItem('refreshRate') || 1000;
+    this.refreshRate = localStorage.getItem('refreshRate') || 1;
 
     // Get lock element
     this.lockElem = document.getElementById('lock');

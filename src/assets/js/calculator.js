@@ -58,7 +58,6 @@ export default class Calculator extends Settings {
           default:
             this.handleNumber(value);
         }
-        this.updateVibration();
       });
     });
   }
