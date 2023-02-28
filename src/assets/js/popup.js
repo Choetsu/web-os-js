@@ -12,6 +12,9 @@ const headerTictac = document.querySelector('.modal-header-tictac');
 
 // Récupération du coin inférieur droit de la fenêtre modale
 const resizer = document.querySelector('.resizer');
+const resizerCalc = document.querySelector('.resizer-calc');
+const resizerHorlo = document.querySelector('.resizer-horlo');
+const resizerTictac = document.querySelector('.resizer-tictac');
 
 // Initialisation des variables pour le glissement et le redimensionnement
 let isDragging = false;
@@ -104,23 +107,48 @@ document.addEventListener('mouseup', () => {
 // Ajout de l'événement "mousedown" sur le coin inférieur droit de la fenêtre modale
 resizer.addEventListener('mousedown', e => {
     isResizing = true;
-    isResizingCalc = true;
-    isResizingHorlo = true;
-    isResizingTictac = true;
     startWidth = parseInt(document.defaultView.getComputedStyle(modalSettings).width, 10);
     startHeight = parseInt(document.defaultView.getComputedStyle(modalSettings).height, 10);
-    startWidthcalc = parseInt(document.defaultView.getComputedStyle(modalCalc).width, 10);
-    startHeightcalc = parseInt(document.defaultView.getComputedStyle(modalCalc).height, 10);
-    startWidthhorlo = parseInt(document.defaultView.getComputedStyle(modalHorlogerie).width, 10);
-    startHeighthorlo = parseInt(document.defaultView.getComputedStyle(modalHorlogerie).height, 10);
-    startWidthtictac = parseInt(document.defaultView.getComputedStyle(modalTictactoe).width, 10);
-    startHeighttictac = parseInt(document.defaultView.getComputedStyle(modalTictactoe).height, 10);
     startX = e.clientX;
     startY = e.clientY;
+    e.preventDefault();
+});
+
+// Ajout de l'événement "mousemove" sur le coin inférieur droit de la fenêtre modale
+resizer.addEventListener('mousemove', e => {
+    if (isResizing && !isDragging && (e.buttons === 1 || e.witch === 1)) {
+        modalSettings.style.width = startWidth + e.clientX - startX + 'px';
+        modalSettings.style.height = startHeight + e.clientY - startY + 'px';
+    }
+});
+
+// Ajout de l'événement "mouseup" sur le coin inférieur droit de la fenêtre modale
+resizer.addEventListener('mouseup', () => {
+    isResizing = false;
+});
+
+resizerCalc.addEventListener('mousedown', e => {
+    isResizingCalc = true;
+    startWidthcalc = parseInt(document.defaultView.getComputedStyle(modalCalc).width, 10);
+    startHeightcalc = parseInt(document.defaultView.getComputedStyle(modalCalc).height, 10);
     startXcalc = e.clientX;
     startYcalc = e.clientY;
+    e.preventDefault();
+});
+
+resizerHorlo.addEventListener('mousedown', e => {
+    isResizingHorlo = true;
+    startWidthhorlo = parseInt(document.defaultView.getComputedStyle(modalHorlogerie).width, 10);
+    startHeighthorlo = parseInt(document.defaultView.getComputedStyle(modalHorlogerie).height, 10);
     startXhorlo = e.clientX;
     startYhorlo = e.clientY;
+    e.preventDefault();
+});
+
+resizerTictac.addEventListener('mousedown', e => {
+    isResizingTictac = true;
+    startWidthtictac = parseInt(document.defaultView.getComputedStyle(modalTictactoe).width, 10);
+    startHeighttictac = parseInt(document.defaultView.getComputedStyle(modalTictactoe).height, 10);
     startXtictac = e.clientX;
     startYtictac = e.clientY;
     e.preventDefault();
