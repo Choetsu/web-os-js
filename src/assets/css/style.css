@@ -570,6 +570,7 @@ li {
 
     #settings-modal,#calculator-modal, #horlogerie-modal, #tictactoe-modal {
         top: 150px;
+        width: 100%;
     }
 
     
