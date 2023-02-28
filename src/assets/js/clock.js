@@ -5,6 +5,7 @@ const departMinutes = document.getElementById("input").value
 
     const timerElement = document.getElementById("timer")
     let interval = setInterval(() => {
+        temps = temps <= 0 ? 0 : temps - 1
         let minutes = parseInt(temps / 60, 10)
         let secondes = parseInt(temps % 60, 10)
 
@@ -12,9 +13,9 @@ const departMinutes = document.getElementById("input").value
         secondes = secondes < 10 ? "0" + secondes : secondes
 
         timerElement.innerText = `${minutes}:${secondes}`
-        temps = temps <= 0 ? 0 : temps - 1
+       
 
-        if (temps === 0) {
+        if (temps <= 0) {
             clearInterval(interval)
             document.getElementById("xyz").play();
             timerElement.innerText = "00:00";
@@ -30,10 +31,6 @@ const departMinutes = document.getElementById("input").value
         }
         }
     }, 1000)
-}
-
-function stop() {
-    document.getElementById('xyz').pause()
 }
 
 // Chronomètre
@@ -161,7 +158,7 @@ document.getElementById("chrono-btn").addEventListener("click", function() {
 document.getElementById("horloge-btn").addEventListener("click", function() {
     document.getElementById("minuteur").style.display = "none";
     document.getElementById("chrono").style.display = "none";
-    document.getElementById("horloge").style.display = "block";
+    document.getElementById("horloge").style.display = "flex";
 });
 
 Horloge();
