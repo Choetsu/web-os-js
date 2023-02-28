@@ -8,17 +8,15 @@
     <meta name="theme-color" content="#ffffff">
     <title>Web os</title>
 
-    
-
     <link rel="icon" href="/assets/os.7ab8b1e2.png" sizes="32x32">
     <link rel="icon" href="/assets/os.7ab8b1e2.png" sizes="192x192">
     <link rel="apple-touch-icon" href="/assets/os.7ab8b1e2.png">
 
     <script src="https://kit.fontawesome.com/fb0e5ed6b3.js" crossorigin="anonymous"></script>    
-    <script type="module" crossorigin src="/assets/index.d40e72e7.js"></script>
-    <link rel="stylesheet" href="/assets/index.19fb8358.css">
+    <script type="module" crossorigin src="/assets/index.3708e229.js"></script>
+    <link rel="stylesheet" href="/assets/index.eaa4fad1.css">
   </head>
-  <body onload="Horloge()">
+  <body>
     <header>
       <nav>
         <div class="nav-container">
@@ -46,6 +44,9 @@
 
         <!-- Bouton pour ouvrir la fenêtre de l'horlogerie -->
         <button id="open-horlogerie-btn" class="draggable" draggable="true"></button>
+
+        <!-- Bouton pour ouvrir la fenêtre du tic tac toe -->
+        <button id="open-tictactoe-btn" class="draggable" draggable="true"></button>
       </div>
 
       <!-- Fenêtre de paramètres -->
@@ -226,15 +227,13 @@
             <span class="close-horlogerie">&times;</span>
           </div>
           <div class="modal-body">
-
-              <ul>
-                  <li><a id="minuteur-btn">Minuteur</a></li>
-                  <li><a id="chrono-btn">Chronomètre</a></li>
-                  <li><a id="horloge-btn">Horloge</a></li>
-              </ul>
+            <ul>
+                <li><a id="minuteur-btn">Minuteur</a></li>
+                <li><a id="chrono-btn">Chronomètre</a></li>
+                <li><a id="horloge-btn">Horloge</a></li>
+            </ul>
             <div id="horlogerie">
               <div id="horloge">
-                
                 <span id="horloge"></span>
               </div>
               <div id="chrono">
@@ -264,7 +263,59 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
+      <!-- Fenêtre tic tac toe -->
+      <div id="tictactoe-modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1>Tic Tac Toe</h1>
+            <span class="close-tictactoe">&times;</span>
+          </div>
+          <div class="modal-body">
+            <table id="table_game">
+              <tr><td class="td_game"><div id="cell0" onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell1" onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell2" onclick="cellClicked(this.id)" class="fixed"></div></td></tr>
+              <tr><td class="td_game"><div id="cell3" onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell4" onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell5" onclick="cellClicked(this.id)" class="fixed"></div></td></tr>
+              <tr><td class="td_game"><div id="cell6" onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell7" onclick="cellClicked(this.id)" class="fixed"></div></td><td class="td_game"><div id="cell8" onclick="cellClicked(this.id)" class="fixed"></div></td></tr>
+            </table>
+            <div id="restart" title="Start new game" onclick="restartGame(true)"><span style="vertical-align:top;position:relative;top:-10px">#</span></div>
+            <table>
+              <tr><th class="th_list">Ordinateur</th><th class="th_list" style="padding-right:10px;padding-left:10px">Tirages</th><th class="th_list">Joueur</th></tr>
+              <tr><td class="td_list" id="computer_score">0</td><td class="td_list" style="padding-right:10px;padding-left:10px" id="tie_score">0</td><td class="td_list" id="player_score">0</td></tr>
+            </table>
+            <!-- The modal dialog for announcing the winner -->
+            <div id="winAnnounce" class="modal-tic">
+              <!-- Modal content -->
+              <div class="modal-content-tic">
+                <span class="close-tic" onclick="closeModal('winAnnounce')">&times;</span>
+                <p id="winText"></p>
+              </div>
+            </div>
+            <!-- The dialog for getting feedback from the user -->
+            <div id="userFeedback" class="modal-tic">
+              <!-- Modal content -->
+              <div class="modal-content-tic">
+                <p id="questionText"></p>
+                <p><button id="yesBtn">Yes</button>&nbsp;<button id="noBtn">No</button></p>
+              </div>
+            </div>
+            <!-- The options dialog -->
+            <div id="optionsDlg" class="modal-tic">
+              <!-- Modal content -->
+              <div class="modal-content-tic">
+                <h3>Votre adversaire est l'ordinateur </h3>
+                  <h4>NIVEAUX</h4>
+                  <label><input type="radio" name="difficulty" id="r0" value="0">facile&nbsp;</label>
+                  <label><input type="radio" name="difficulty" id="r1" value="1" checked>difficile</label><br>
+                  <h5>vous souhaitez être X ou O ? </h5>
+                  <label><input type="radio" name="player" id="rx" value="x" checked>X (joue en premier)&nbsp;</label>
+                  <label><input type="radio" name="player" id="ro" value="o">O<br></label>
+                  <p><button id="okBtn" onclick="getOptions()">Jouer</button></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
 
@@ -303,6 +354,18 @@
 
       closeBtnHorlogerie.addEventListener("click", function() {
         horlogerieModal.style.display = "none";
+      });
+
+      const openTicTacToeBtn = document.getElementById("open-tictactoe-btn");
+      const ticTacToeModal = document.getElementById("tictactoe-modal");
+      const closeBtnTicTacToe = document.querySelector(".close-tictactoe");
+
+      openTicTacToeBtn.addEventListener("click", function() {
+        ticTacToeModal.style.display = "block";
+      });
+
+      closeBtnTicTacToe.addEventListener("click", function() {
+        ticTacToeModal.style.display = "none";
       });
     </script>
 
@@ -442,9 +505,8 @@
         draggableElement.style.transform = `translate(${finalX}px, ${finalY}px)`;
       }
     </script>
-
-    
     
     <script src="./assets/js/clock.js"></script>
+    <script src="./assets/js/tictactoe.js"></script>
   </body>
 </html>
