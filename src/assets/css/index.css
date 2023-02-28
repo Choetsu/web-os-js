@@ -273,7 +273,6 @@ input[type="checkbox"]:checked {
     left: 0;
     width: 60%;
     height: 100%;
-    /* background-color: rgba(0, 0, 0, 0.5); */
 }
 
 #calculator {
