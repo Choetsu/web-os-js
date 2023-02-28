@@ -44,6 +44,10 @@ export default class SettingsManager {
     this.pingServer = localStorage.getItem('pingServer') || 'google.com';
     this.refreshRate = localStorage.getItem('refreshRate') || 1;
 
+    // Get theme element
+    this.themeElem = document.getElementById('theme');
+    this.theme = localStorage.getItem('theme') === 'true';
+  
     // Get lock element
     this.lockElem = document.getElementById('lock');
     this.enablePinElem = document.getElementById('lock-method-pin');
@@ -53,8 +57,7 @@ export default class SettingsManager {
     
     // Get save settings button
     this.saveSettingsButton = document.getElementById('save-settings-button');
-    
-  }
+}
 
   // initSentry() {
   //   Sentry.init({
@@ -82,6 +85,7 @@ export default class SettingsManager {
     const showLatency = localStorage.getItem('showLatency') === 'true';
     const pingServer = localStorage.getItem('pingServer') || 'google.com';
     const refreshRate = localStorage.getItem('refreshRate') || 1;
+    const theme = localStorage.getItem('theme') === 'true';
     const enablePinLock = localStorage.getItem('enablePinLock') === 'true';
     const enablePatternLock = localStorage.getItem('enablePatternLock') === 'true';
 
@@ -98,6 +102,7 @@ export default class SettingsManager {
     this.showLatencyElem.checked = showLatency;
     this.pingServerElem.value = pingServer;
     this.refreshRateElem.value = refreshRate;
+    this.themeElem.checked = theme;
     this.enablePinElem.checked = enablePinLock;
     this.enablePatternElem.checked = enablePatternLock;
   }
@@ -153,6 +158,12 @@ export default class SettingsManager {
       this.vibrationElem.textContent = 'La vibration n\'est pas prise en charge';
       window.navigator.vibrate(0);
     }
+
+    if (this.showVibration) {
+      this.vibrationElem.style.display = 'block';
+    } else {
+      this.vibrationElem.style.display = 'none';
+    }
   }
 
   updateBattery() {
@@ -189,6 +200,14 @@ export default class SettingsManager {
     }
   }
 
+  updateTheme() {
+    if (this.theme) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }
+
   updateLock() {
     if (this.enablePinLock) {
       this.lockElem.textContent = 'Verrouillage: PIN';
@@ -213,10 +232,10 @@ export default class SettingsManager {
     localStorage.setItem('showLatency', this.showLatencyElem.checked);
     localStorage.setItem('pingServer', this.pingServerElem.value);
     localStorage.setItem('refreshRate', this.refreshRateElem.value);
+    localStorage.setItem('theme', this.themeElem.checked);
     localStorage.setItem('enablePinLock', this.enablePinElem.checked);
     localStorage.setItem('enablePatternLock', this.enablePatternElem.checked);
-
-    console.log('Settings saved successfully.');
+    // console.log('Settings saved successfully.');
   }
 }
 
@@ -224,6 +243,7 @@ export default class SettingsManager {
 const settings = new SettingsManager();
 // settings.initSentry();
 settings.updateCheckboxes();
+settings.updateTheme();
 settings.updateHour();
 setInterval(settings.updateHour.bind(settings), 1000);
 settings.updateDate();

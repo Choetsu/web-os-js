@@ -18,11 +18,11 @@ export default class Calculator extends Settings {
     const request = window.indexedDB.open('CalculatorDB', 1); 
     request.onerror = () => console.error('Failed to open database'); 
     request.onsuccess = () => {
-      console.log('Database opened successfully');
+      console.log('Calculator Database opened successfully');
       this.db = request.result;
     };
     request.onupgradeneeded = (event) => {
-      console.log('Upgrading database');
+      console.log('Upgrading calculator database');
       const db = event.target.result;
       db.createObjectStore('calculations', { keyPath: 'id', autoIncrement: true }); 
     };
@@ -38,12 +38,15 @@ export default class Calculator extends Settings {
           case '-':
           case '*':
           case '/':
+            this.updateVibration();
             this.handleOperation(value);
             break;
           case '=':
+            this.updateVibration();
             this.handleEquals();
             break;
           case 'C':
+            this.updateVibration();
             this.handleClear();
             break;
           case '+/-':
@@ -53,6 +56,7 @@ export default class Calculator extends Settings {
             this.handleDecimal();
             break;
           case '':
+            this.updateVibration();
             this.handleBackspace();
             break;
           default:

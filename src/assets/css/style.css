@@ -112,7 +112,7 @@ nav {
     position: fixed;
     top: 0;
     left: 0;
-    width: 55%;
+    width: 50%;
     height: 100%;
     /* background-color: rgba(0, 0, 0, 0.5); */
 }
@@ -121,7 +121,7 @@ nav {
 .modal-content {
     background-color: #fff;
     border-radius: 5px;
-    margin: 5% auto;
+    margin: 10% auto;
     padding: 20px;
     max-width: 80%;
     max-height: 80%;
@@ -306,7 +306,7 @@ input[type="checkbox"]:checked {
     position: fixed;
     top: 0;
     left: 0;
-    width: 60%;
+    width: 50%;
     height: 100%;
 }
 
@@ -366,93 +366,42 @@ input[type="text"]#display {
 }  
 
 /** Dark Mode **/ 
-#dark {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 3rem 0;
-    padding-right: 18rem;
-}
-
-#dark-mode-switch {
-    appearance: none;
-    width: 60px;
-    height: 30px;
-    border-radius: 15px;
-    background-color: #ee2a2a;
-    outline: none;
-    cursor: pointer;
-    transition: background-color 0.6s;
-}
-  
-#dark-mode-switch::before {
-    content: "";
-    display: block;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: #fff;
-    position: relative;
-    top: 0;
-    left: 0;
-    transition: all 0.6s;
-}
-  
-#dark-mode-switch:checked::before {
-    transform: translateX(30px);
-}
-
-label[for="dark-mode-switch"] {
-    margin-left: 10px;
-    font-size: 16px;
-    color: #000;
-}
-
-#dark-mode-switch:checked {
-    background-color: rgb(68, 224, 68);
-}
-  
-#dark-mode-switch:checked + label {
-    color: var(--dark-text-color);
-}   
-  
-#dark-mode-switch:checked + label:before {
+#theme:checked + label:before {
     content: "Light";
 }
 
-#dark-mode-switch + label:before {
+#theme + label:before {
     content: "Dark";
 }
-
-body.dark-mode {
+label[for="theme"] {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #000;
+} 
+body.dark {
     background-color: var(--dark-background-color);
     color: var(--dark-text-color);
 }
 
-body.dark-mode button.other {
+body.dark #calculator button.other {
     background-color: var(--dark-blue-color);
     color: #fff;
 }
 
-body.dark-mode button.other:hover {
+body.dark #calculator button.other:hover {
     background-color: var(--blue-color);
     color: #fff;
 }
 
-body.dark-mode button.number {
+body.dark #calculator button.number {
     background-color: var(--drak-grey-color);
     color: var(--dark-text-color);
 }
 
-body.dark-mode button.number:hover {
+body.dark #calculator button.number:hover {
     background-color: var(--grey-color);
     color: var(--dark-text-color);
 }
-  
-#calculator,
-#dark-mode-switch + label {
-    transition: all 0.6s;
-} 
 
 /** Horlogerie **/
 #open-horlogerie-btn {
@@ -481,12 +430,6 @@ body.dark-mode button.number:hover {
 
 #minuteur{
     display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 40%;
-    height: 100%;
-    /* background-color: rgba(0, 0, 0, 0.5); */
 }
 
 #chrono{

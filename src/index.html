@@ -8,8 +8,8 @@
     <meta name="theme-color" content="#ffffff">
     <title>Web os</title>
 
-    <link rel="stylesheet" href="./assets/css/index.css">
-    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/tictactoe.css">
 
     <link rel="icon" href="./assets/img/os.png" sizes="32x32">
     <link rel="icon" href="./assets/img/os.png" sizes="192x192">
@@ -52,7 +52,7 @@
 
       <!-- Fenêtre de paramètres -->
       <div id="settings-modal">
-        <div class="modal-content resizer">
+        <div class="modal-content">
           <div class="modal-header">
             <h1>Paramètres</h1>
             <span class="close">&times;</span>
@@ -159,16 +159,8 @@
 
             <!-- Configurer le thème -->
             <h3>Thème</h3>
-            <label>
-              <input type="radio" id="theme-light" name="theme" value="light" checked>
-              Light
-            </label>
-            <br>
-            <label>
-              <input type="radio" id="theme-dark" name="theme" value="dark">
-              Dark
-            </label>
-
+              <input type="checkbox" id="theme">
+              <label for="theme"></label>
             <!-- Bouton pour enregistrer les paramètres -->
             <form>
               <button id="save-settings-button">Enregistrer les paramètres</button>
@@ -185,10 +177,6 @@
             <span class="close-calc">&times;</span>
           </div>
           <div class="modal-body">
-            <!-- <div id="dark">
-              <input type="checkbox" id="dark-mode-switch">
-              <label for="dark-mode-switch"></label>
-            </div> -->
             <div id="calculator">
                 <input type="text" id="display">
                 <br>
@@ -327,56 +315,7 @@
         </div>
     </main>
 
-    <script>
-      const openSettingsBtn = document.getElementById("open-settings-btn");
-      const settingsModal = document.getElementById("settings-modal");
-      const closeBtn = document.querySelector(".close");
-
-      openSettingsBtn.addEventListener("click", function() {
-        settingsModal.style.display = "block";
-      });
-
-      closeBtn.addEventListener("click", function() {
-        settingsModal.style.display = "none";
-      });
-
-      const openCalculatorBtn = document.getElementById("open-calculator-btn");
-      const calculatorModal = document.getElementById("calculator-modal");
-      const closeBtnCalc = document.querySelector(".close-calc");
-
-      openCalculatorBtn.addEventListener("click", function() {
-        calculatorModal.style.display = "block";
-      });
-
-      closeBtnCalc.addEventListener("click", function() {
-        calculatorModal.style.display = "none";
-      });
-
-      const openHorlogerieBtn = document.getElementById("open-horlogerie-btn");
-      const horlogerieModal = document.getElementById("horlogerie-modal");
-      const closeBtnHorlogerie = document.querySelector(".close-horlogerie");
-
-      openHorlogerieBtn.addEventListener("click", function() {
-        horlogerieModal.style.display = "block";
-      });
-
-      closeBtnHorlogerie.addEventListener("click", function() {
-        horlogerieModal.style.display = "none";
-      });
-
-      const openTicTacToeBtn = document.getElementById("open-tictactoe-btn");
-      const ticTacToeModal = document.getElementById("tictactoe-modal");
-      const closeBtnTicTacToe = document.querySelector(".close-tictactoe");
-
-      openTicTacToeBtn.addEventListener("click", function() {
-        ticTacToeModal.style.display = "block";
-      });
-
-      closeBtnTicTacToe.addEventListener("click", function() {
-        ticTacToeModal.style.display = "none";
-      });
-    </script>
-
+    <script src="./assets/js/open.js"></script>
     <script src="./assets/js/settings.js" type="module"></script>
     <script src="./assets/js/calculator.js" type="module"></script>
     <script src="./assets/js/clock.js"></script>
