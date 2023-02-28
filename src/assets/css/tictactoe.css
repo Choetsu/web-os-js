@@ -1,0 +1,216 @@
+table {
+    margin: 2% auto;
+    border-collapse: collapse;
+}
+#table_game {
+    position: relative;
+    font-size: 120px;
+    margin: 1% auto;
+    border-collapse: collapse;
+}
+.td_game {
+    border: 4px solid rgb(230, 230, 230);
+    width: 90px;
+    height: 90px;
+    padding: 0;
+    vertical-align: middle;
+    text-align: center;
+}
+.fixed {
+    width: 90px;
+    height: 90px;
+    line-height: 90px;
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+}
+.td_list {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+.th_list {
+    font-size: 1.3em;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: underline;
+}
+#restart {
+    font-size: 3em;
+    width: 1em;
+    height: 0.9em;
+    cursor: pointer;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.x {
+    color: darksalmon;
+    position: relative;
+    top: -8px;
+    font-size: 1.2em;
+    cursor: default;
+}
+.o {
+    color: aquamarine;
+    position: relative;
+    top: -7px;
+    font-size: 1.0em;
+    cursor: default;
+}
+
+/* modal background */
+.modal-tic {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* enable scroll if needed */
+    background-color: black; /* fallback color */
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* modal content */
+.modal-content-tic {
+    background-color: rgb(240, 240, 240);
+    color: rgb(32, 32, 32);
+    font-size: 1.5em;
+    font-weight: bold;
+    /* 16 % from the top and centered */
+    margin: 16% auto;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 380px;
+    max-width: 80%;
+}
+.modal-content-tic p {
+    margin: 0;
+    padding: 0;
+}
+
+/* close button for modal dialog */
+.close-tic {
+    color: rgb(170, 170, 170);
+    float: right;
+    position: relative;
+    top: -25px;
+    right: -10px;
+    font-size: 34px;
+    font-weight: bold;
+}
+.close-tic:hover,
+.close-tic:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.win-color {
+    background-color: rgb(240, 240, 240);
+}
+
+
+/* CSS */
+.button-49,
+.button-49:after {
+  width: 80px;
+  height: 45px;
+  line-height: 45px;
+  font-size: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  background: linear-gradient(45deg, transparent 5%, #FF013C 5%);
+  border: 0;
+  color: #fff;
+  letter-spacing: 3px;
+  box-shadow: 6px 0px 0px #00E6F6;
+  outline: transparent;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.button-49:after {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+  
+  content: 'ALTERNATE TEXT';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #FF013C 5%);
+  text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
+  clip-path: var(--slice-0);
+}
+
+.button-49:hover:after {
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: var(--slice-1);
+    transform: translate(-20px, -10px);
+  }
+  10% {
+    clip-path: var(--slice-3);
+    transform: translate(10px, 10px);
+  }
+  20% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 10px);
+  }
+  30% {
+    clip-path: var(--slice-3);
+    transform: translate(0px, 5px);
+  }
+  40% {
+    clip-path: var(--slice-2);
+    transform: translate(-5px, 0px);
+  }
+  50% {
+    clip-path: var(--slice-3);
+    transform: translate(5px, 0px);
+  }
+  60% {
+    clip-path: var(--slice-4);
+    transform: translate(5px, 10px);
+  }
+  70% {
+    clip-path: var(--slice-2);
+    transform: translate(-10px, 10px);
+  }
+  80% {
+    clip-path: var(--slice-5);
+    transform: translate(20px, -10px);
+  }
+  90% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 0px);
+  }
+  100% {
+    clip-path: var(--slice-1);
+    transform: translate(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .button-49,
+  .button-49:after {
+    width: 100px;
+    height: 50px;
+    line-height: 48px;
+  }
+}
