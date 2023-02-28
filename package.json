@@ -1,5 +1,9 @@
 {
   "private": true,
+  "name": "web-os-js",
+  "version": "1.0.0",
+  "description": "WebOS for JS",
+  "type": "module",
   "scripts": {
     "start": "vite",
     "build": "vite build",

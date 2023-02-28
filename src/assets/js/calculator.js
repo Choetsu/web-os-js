@@ -3,7 +3,7 @@ import Settings from './settings.js';
 export default class Calculator extends Settings {
   constructor() {
     super();
-    this.initSentry();
+    // this.initSentry();
     this.currentValue = 0;
     this.operation = null;
     this.pendingValue = null;
@@ -58,7 +58,6 @@ export default class Calculator extends Settings {
           default:
             this.handleNumber(value);
         }
-        this.updateVibration();
       });
     });
   }
