@@ -350,7 +350,7 @@ function cellClicked(id) {
 // ask should be true if we should ask users if they want to play as X or O
 function restartGame(ask) {
     if (moves > 0) {
-        var response = confirm("Are you sure you want to start over?");
+        var response = confirm("Vous êtes sûr de vouloir recommencer ?");
         if (response === false) {
             return;
         }
@@ -632,11 +632,11 @@ function closeModal(id) {
 
 function endGame(who) {
     if (who == player) {
-        announceWinner("Congratulations, you won!");
+        announceWinner("Félicitations, vous avez gagné!");
     } else if (who == computer) {
-        announceWinner("Computer wins!");
+        announceWinner("L'ordinateur gagne!");
     } else {
-        announceWinner("It's a tie!");
+        announceWinner("C'est une égalité!");
     }
     gameOver = true;
     whoseTurn = 0;
@@ -651,3 +651,5 @@ function endGame(who) {
     }
     setTimeout(restartGame, 800);
 }
+
+initialize();

@@ -163,3 +163,5 @@ document.getElementById("horloge-btn").addEventListener("click", function() {
     document.getElementById("chrono").style.display = "none";
     document.getElementById("horloge").style.display = "block";
 });
+
+Horloge();
