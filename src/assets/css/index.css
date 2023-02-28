@@ -137,7 +137,46 @@ nav {
     cursor: pointer;
 }
 
+.modal-header-calc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.modal-header-horlo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.modal-header-tictac {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
 .modal-header h1 {
+    font-size: 30px;
+    color: #000;
+}
+
+.modal-header-calc h1 {
+    font-size: 30px;
+    color: #000;
+}
+
+.modal-header-horlo h1 {
+    font-size: 30px;
+    color: #000;
+}
+
+.modal-header-tictac h1 {
     font-size: 30px;
     color: #000;
 }

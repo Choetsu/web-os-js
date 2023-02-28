@@ -5,66 +5,108 @@ const modalHorlogerie = document.querySelector('#horlogerie-modal');
 const modalTictactoe = document.querySelector('#tictactoe-modal');
 
 // Récupération de l'en-tête de la fenêtre modale
-const header = document.querySelectorAll('.modal-header');
+const header = document.querySelector('.modal-header');
+const headerCalc = document.querySelector('.modal-header-calc');
+const headerHorlo = document.querySelector('.modal-header-horlo');
+const headerTictac = document.querySelector('.modal-header-tictac');
 
 // Récupération du coin inférieur droit de la fenêtre modale
 const resizer = document.querySelector('.resizer');
 
 // Initialisation des variables pour le glissement et le redimensionnement
 let isDragging = false;
+let isDraggingCalc = false;
+let isDraggingHorlo = false;
+let isDraggingTictac = false;
 let isResizing = false;
+let isResizingCalc = false;
+let isResizingHorlo = false;
+let isResizingTictac = false;
 let startX, startY, startWidth, startHeight;
 let startXcalc, startYcalc, startWidthcalc, startHeightcalc;
 let startXhorlo, startYhorlo, startWidthhorlo, startHeighthorlo;
 let startXtictac, startYtictac, startWidthtictac, startHeighttictac;
 
 // Ajout de l'événement "mousedown" sur l'en-tête de la fenêtre modale
-header.forEach(element => {
-    element.addEventListener('mousedown', e => {
+header.addEventListener('mousedown', e => {
     isDragging = true;
     startX = e.clientX - modalSettings.offsetLeft;
     startY = e.clientY - modalSettings.offsetTop;
+});
+
+headerCalc.addEventListener('mousedown', e => {
+    isDraggingCalc = true;
     startXcalc = e.clientX - modalCalc.offsetLeft;
     startYcalc = e.clientY - modalCalc.offsetTop;
+});
+
+headerHorlo.addEventListener('mousedown', e => {
+    isDraggingHorlo = true;
     startXhorlo = e.clientX - modalHorlogerie.offsetLeft;
     startYhorlo = e.clientY - modalHorlogerie.offsetTop;
+});
+
+headerTictac.addEventListener('mousedown', e => {
+    isDraggingTictac = true;
     startXtictac = e.clientX - modalTictactoe.offsetLeft;
     startYtictac = e.clientY - modalTictactoe.offsetTop;
-    });
-});
+}); 
+
 // Ajout de l'événement "mousemove" sur le document
 document.addEventListener('mousemove', e => {
-  if (isDragging) {
-    modalSettings.style.left = e.clientX - startX + 'px';
-    modalSettings.style.top = e.clientY - startY + 'px';
-    modalCalc.style.left = e.clientX - startXcalc + 'px';
-    modalCalc.style.top = e.clientY - startYcalc + 'px';
-    modalHorlogerie.style.left = e.clientX - startXhorlo + 'px';
-    modalHorlogerie.style.top = e.clientY - startYhorlo + 'px';
-    modalTictactoe.style.left = e.clientX - startXtictac + 'px';
-    modalTictactoe.style.top = e.clientY - startYtictac + 'px';
-  }
-  if (isResizing) {
-    modalSettings.style.width = startWidth + e.clientX - startX + 'px';
-    modalSettings.style.height = startHeight + e.clientY - startY + 'px';
-    modalCalc.style.width = startWidthcalc + e.clientX - startXcalc + 'px';
-    modalCalc.style.height = startHeightcalc + e.clientY - startYcalc + 'px';
-    modalHorlogerie.style.width = startWidthhorlo + e.clientX - startXhorlo + 'px';
-    modalHorlogerie.style.height = startHeighthorlo + e.clientY - startYhorlo + 'px';
-    modalTictactoe.style.width = startWidthtictac + e.clientX - startXtictac + 'px';
-    modalTictactoe.style.height = startHeighttictac + e.clientY - startYtictac + 'px';
-  }
+    if (isDragging) {
+        modalSettings.style.left = e.clientX - startX + 'px';
+        modalSettings.style.top = e.clientY - startY + 'px';
+    }
+    if(isDraggingCalc) {
+        modalCalc.style.left = e.clientX - startXcalc + 'px';
+        modalCalc.style.top = e.clientY - startYcalc + 'px';
+    }
+    if(isDraggingHorlo) {
+        modalHorlogerie.style.left = e.clientX - startXhorlo + 'px';
+        modalHorlogerie.style.top = e.clientY - startYhorlo + 'px';
+    }
+    if(isDraggingTictac) {
+        modalTictactoe.style.left = e.clientX - startXtictac + 'px';
+        modalTictactoe.style.top = e.clientY - startYtictac + 'px';
+    }
+
+    if (isResizing) {
+        modalSettings.style.width = startWidth + e.clientX - startX + 'px';
+        modalSettings.style.height = startHeight + e.clientY - startY + 'px';
+    }
+    if(isResizingCalc) {
+        modalCalc.style.width = startWidthcalc + e.clientX - startXcalc + 'px';
+        modalCalc.style.height = startHeightcalc + e.clientY - startYcalc + 'px';
+    }
+    if(isResizingHorlo) {
+        modalHorlogerie.style.width = startWidthhorlo + e.clientX - startXhorlo + 'px';
+        modalHorlogerie.style.height = startHeighthorlo + e.clientY - startYhorlo + 'px';
+    }
+    if(isResizingTictac) {
+        modalTictactoe.style.width = startWidthtictac + e.clientX - startXtictac + 'px';
+        modalTictactoe.style.height = startHeighttictac + e.clientY - startYtictac + 'px';
+    }
 });
 
 // Ajout de l'événement "mouseup" sur le document
 document.addEventListener('mouseup', () => {
-  isDragging = false;
-  isResizing = false;
+    isDragging = false;
+    isDraggingCalc = false;
+    isDraggingHorlo = false;
+    isDraggingTictac = false;
+    isResizing = false;
+    isResizingCalc = false;
+    isResizingHorlo = false;
+    isResizingTictac = false;
 });
 
 // Ajout de l'événement "mousedown" sur le coin inférieur droit de la fenêtre modale
 resizer.addEventListener('mousedown', e => {
     isResizing = true;
+    isResizingCalc = true;
+    isResizingHorlo = true;
+    isResizingTictac = true;
     startWidth = parseInt(document.defaultView.getComputedStyle(modalSettings).width, 10);
     startHeight = parseInt(document.defaultView.getComputedStyle(modalSettings).height, 10);
     startWidthcalc = parseInt(document.defaultView.getComputedStyle(modalCalc).width, 10);
