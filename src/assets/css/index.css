@@ -112,9 +112,9 @@ nav {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 55%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    /* background-color: rgba(0, 0, 0, 0.5); */
 }
 
 /* Style pour le contenu de la fenêtre de paramètres */
@@ -134,9 +134,49 @@ nav {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.modal-header-calc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.modal-header-horlo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.modal-header-tictac {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .modal-header h1 {
+    font-size: 30px;
+    color: #000;
+}
+
+.modal-header-calc h1 {
+    font-size: 30px;
+    color: #000;
+}
+
+.modal-header-horlo h1 {
+    font-size: 30px;
+    color: #000;
+}
+
+.modal-header-tictac h1 {
     font-size: 30px;
     color: #000;
 }
@@ -145,6 +185,7 @@ nav {
 .close-calc,
 .close-horlogerie,
 .close-tictactoe {
+
     font-size: 3rem;
     font-weight: bold;
     color: #000;
@@ -260,6 +301,14 @@ input[type="checkbox"]:checked {
     left: 0;    
 }
 
+#calculator-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 100%;
+}
 
 #calculator {
     background-color: var(--background-color);
@@ -432,6 +481,12 @@ body.dark-mode button.number:hover {
 
 #minuteur{
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    /* background-color: rgba(0, 0, 0, 0.5); */
 }
 
 #chrono{
@@ -541,8 +596,15 @@ li {
     left: 0;    
 }
 
-
-
+#tictactoe-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+}
 
 @media screen and (max-width: 768px) {
     nav {
@@ -612,5 +674,45 @@ li {
 
 .button-76:hover {
   box-shadow: none;
+}
+/** resize **/
+.resizer {  
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: nwse-resize;
+    z-index: 10;
+}
+
+.resizer-calc {  
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: nwse-resize;
+    z-index: 10;
+}
+
+.resizer-horlo {  
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: nwse-resize;
+    z-index: 10;
+}
+
+.resizer-tictac {  
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: nwse-resize;
+    z-index: 10;
 }
 
