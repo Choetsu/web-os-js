@@ -107,7 +107,7 @@ nav {
     left: 0;
 }
   
-#settings-modal {
+#settings-modal,#calculator-modal, #horlogerie-modal, #tictactoe-modal {
     display: none;
     position: fixed;
     top: 0;
@@ -141,7 +141,10 @@ nav {
     color: #000;
 }
 
-.close {
+.close,
+.close-calc,
+.close-horlogerie,
+.close-tictactoe {
     font-size: 3rem;
     font-weight: bold;
     color: #000;
@@ -149,21 +152,13 @@ nav {
 }
 
 .close:hover,
-.close:focus {
-    color: #aaa;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.close-calc {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #000;
-    cursor: pointer;
-}
-
+.close:focus,
 .close-calc:hover,
-.close-calc:focus {
+.close-calc:focus,
+.close-horlogerie:hover,
+.close-horlogerie:focus,
+.close-tictactoe:hover,
+.close-tictactoe:focus {
     color: #aaa;
     text-decoration: none;
     cursor: pointer;
@@ -265,15 +260,6 @@ input[type="checkbox"]:checked {
     left: 0;    
 }
 
-#calculator-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-}
 
 #calculator {
     background-color: var(--background-color);
@@ -435,35 +421,13 @@ body.dark-mode button.number:hover {
     left: 0;    
 }
 
-#horlogerie-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-
-.close-horlogerie {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #000;
-    cursor: pointer;
-}
-
-.close-horlogerie:hover,
-.close-horlogerie:focus {
-    color: #aaa;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 #horloge{
     font-size: 40px;
     color: #000;
-    display: block;
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #minuteur{
@@ -472,6 +436,45 @@ body.dark-mode button.number:hover {
 
 #chrono{
     display: none;
+}
+
+.minuteur{
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.minuteur-input{
+    text-align: center;
+
+}
+
+.nav-horlo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.chrono{
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.chrono form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.chrono form input{
+    margin: 5px;
 }
 
 #time {
@@ -538,28 +541,76 @@ li {
     left: 0;    
 }
 
-#tictactoe-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+
+
+
+@media screen and (max-width: 768px) {
+    nav {
+        height: 150px;
+    }
+      
+    .nav-container {
+        flex-wrap: wrap;
+        margin: 5%;
+    }
+      
+    #app-container {
+        padding-top: 180px;
+    }
+
+    #calculator {
+        padding: 20px;
+        width: 300px;
+    }
+
+    #settings-modal,#calculator-modal, #horlogerie-modal, #tictactoe-modal {
+        top: 150px;
+    }
+
+    
+    input[type="text"]#display {
+        width: 90%;
+        height: 60px;
+        font-size: 28px;
+    }
+      
+    #calculator button {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+    #calculator button#btn-backspace {
+        width: 6.4rem;
+    }  
+
+    label{
+        flex-wrap: wrap;
+    }
+}
+    
+
+
+/* CSS */
+.button-76 {
+  background-color: #cf245f;
+  background-image: linear-gradient(to bottom right, #fcd34d, #ef4444, #ec4899);
+  border: 0;
+  border-radius: .25rem;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1rem; /* 18px */
+  font-weight: 600;
+  line-height: 1.25rem; /* 28px */
+  padding: .5rem .75rem!important; /* 9px 12px */
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
-.close-tictactoe {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #000;
-    cursor: pointer;
+.button-76:hover {
+  box-shadow: none;
 }
-
-.close-tictactoe:hover,
-.close-tictactoe:focus {
-    color: #aaa;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 
