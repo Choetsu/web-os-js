@@ -552,6 +552,7 @@ li {
 @media screen and (max-width: 768px) {
     nav {
         height: 150px;
+        font-size: 12px;
     }
       
     .nav-container {
@@ -592,6 +593,11 @@ li {
     label{
         flex-wrap: wrap;
     }
+
+    form{
+        padding-bottom: 15%;
+    }
+
 }
     
 
@@ -619,44 +625,6 @@ li {
 .button-76:hover {
   box-shadow: none;
 }
-/** resize **/
-.resizer {  
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: nwse-resize;
-    z-index: 10;
-}
 
-.resizer-calc {  
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: nwse-resize;
-    z-index: 10;
-}
 
-.resizer-horlo {  
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: nwse-resize;
-    z-index: 10;
-}
-
-.resizer-tictac {  
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    cursor: nwse-resize;
-    z-index: 10;
-}
 

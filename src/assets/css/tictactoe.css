@@ -76,7 +76,7 @@ table {
 .modal-content-tic {
     background-color: rgb(240, 240, 240);
     color: rgb(32, 32, 32);
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: bold;
     /* 16 % from the top and centered */
     margin: 16% auto;
